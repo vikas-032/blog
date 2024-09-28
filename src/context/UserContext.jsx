@@ -3,12 +3,31 @@ import axios from 'axios'
 import { createContext,useEffect,useState } from 'react'
 import {URL} from "../url"
 
-export const UserContext =createContext({children})  
+export const UserContext =createContext({})  
  
 export default function userContext({children}){
+
+
+    const [user, setUser] = userState(null)
+    useEffect(() =>{
+        getUser()
+    }, [])
+
+    const getUser = async()=>{
+try{
+    const res =await axios.get(URL+ '/api/auth/refe', {withCredentials: true})
+    setUser(res.data)
+}
+
+catch(err){
+console.log(err)
+    }
+}
+
+
     return(
-    <div>
-        
-    </div>
+   <UserContext.Provider value={(user, setUser)}>
+    {children}
+   </UserContext.Provider>
     )
 }

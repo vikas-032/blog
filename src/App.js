@@ -9,11 +9,12 @@ import MyBlogs from "./pages/MyBlogs"
 import CreatePost from "./pages/CreatePost"
 
 import {Route , Routes} from 'react-router-dom'
+import { UserContext } from "./context/UserContext";
 
 function App() {
   return (
-    
-    <Routes>
+    <UserContextProvider>
+ <Routes>
       <Route exact path='/' element={<Home/> }/>
       <Route exact path='/login' element={<Login/> }/>
       <Route exact path='/register' element={<Register/> }/>
@@ -24,6 +25,8 @@ function App() {
       <Route exact path='/profile/:id' element={<Profile/> }/>
 
     </Routes> 
+    </UserContextProvider>
+   
     
   );
 
